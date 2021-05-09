@@ -1,0 +1,21 @@
+type List @model {
+  id: ID!
+  title: String!
+  description: String
+  listItems: [Item] @connection(name:"ItemsList")
+}
+
+type Item @model {
+  id: ID!
+  title: String!
+  quantity: Int
+  done: Boolean
+  list: List @connection(name:"ItemsList")
+  actions: [Action] @connection(name:"actionItems")
+}
+
+type Action @model {
+  id: ID!
+  action: String
+  item: Item @connection(name:"actionItems")
+}
